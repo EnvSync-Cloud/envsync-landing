@@ -1,4 +1,3 @@
-
 import { Shield, Twitter, Github, Linkedin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
