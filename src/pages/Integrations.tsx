@@ -13,16 +13,16 @@ const Integrations = () => {
       description: "Get real-time notifications about environment changes and security alerts directly in your Slack channels.",
       icon: Slack,
       status: "available",
-      color: "text-purple-600",
-      bgColor: "bg-purple-50"
+      color: "text-slate-600",
+      bgColor: "bg-slate-100"
     },
     {
       name: "Discord",
       description: "Receive instant updates and alerts about your environment variables in your Discord server.",
       icon: MessageCircle,
       status: "available", 
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50"
+      color: "text-slate-600",
+      bgColor: "bg-slate-100"
     }
   ];
 
@@ -32,24 +32,24 @@ const Integrations = () => {
       description: "Seamlessly sync your environment variables with Vercel deployments.",
       icon: Zap,
       status: "coming-soon",
-      color: "text-gray-600",
-      bgColor: "bg-gray-50"
+      color: "text-slate-600",
+      bgColor: "bg-slate-100"
     },
     {
       name: "CloudFlare",
       description: "Integrate with CloudFlare Workers and Pages for secure environment management.",
       icon: Cloud,
       status: "coming-soon",
-      color: "text-gray-600", 
-      bgColor: "bg-gray-50"
+      color: "text-slate-600", 
+      bgColor: "bg-slate-100"
     },
     {
       name: "AWS",
       description: "Connect with AWS services for enterprise-grade secret management.",
       icon: Shield,
       status: "coming-soon",
-      color: "text-gray-600",
-      bgColor: "bg-gray-50"
+      color: "text-slate-600",
+      bgColor: "bg-slate-100"
     }
   ];
 
@@ -72,8 +72,8 @@ const Integrations = () => {
           {/* Notifications Section */}
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 bg-emerald-100 rounded-lg">
-                <MessageCircle className="h-6 w-6 text-emerald-600" />
+              <div className="p-2 bg-slate-100 rounded-lg">
+                <MessageCircle className="h-6 w-6 text-slate-600" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-slate-900">Notifications</h2>
@@ -113,8 +113,8 @@ const Integrations = () => {
           {/* KMS Section */}
           <section>
             <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <Shield className="h-6 w-6 text-blue-600" />
+              <div className="p-2 bg-slate-100 rounded-lg">
+                <Shield className="h-6 w-6 text-slate-600" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-slate-900">Key Management Systems</h2>
