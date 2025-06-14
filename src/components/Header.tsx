@@ -2,20 +2,32 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <header className="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <Shield className="h-8 w-8 text-emerald-400" />
             <span className="text-xl font-bold text-white">EnvSync</span>
-          </div>
+          </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
+            <Link 
+              to="/about" 
+              className={`transition-colors ${
+                location.pathname === '/about' 
+                  ? 'text-emerald-400' 
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              About
+            </Link>
             <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
             <a href="#pricing" className="text-slate-300 hover:text-white transition-colors">Pricing</a>
             <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
@@ -40,6 +52,17 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-slate-800">
             <nav className="flex flex-col space-y-4">
+              <Link 
+                to="/about" 
+                className={`transition-colors ${
+                  location.pathname === '/about' 
+                    ? 'text-emerald-400' 
+                    : 'text-slate-300 hover:text-white'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
               <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
               <a href="#pricing" className="text-slate-300 hover:text-white transition-colors">Pricing</a>
               <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
