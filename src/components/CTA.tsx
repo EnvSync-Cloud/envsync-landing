@@ -20,12 +20,12 @@ const CTA = () => {
           
           <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
             Join thousands of developers who trust EnvSync to keep their secrets safe. 
-            Start your free trial today, no credit card required.
+            Get started today and experience the difference.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
             <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold">
-              Start free trial
+              Get Started
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
@@ -40,15 +40,15 @@ const CTA = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-slate-300">
             <div className="flex items-center">
               <CheckCircle className="h-5 w-5 text-emerald-400 mr-2" />
-              <span>Free 14-day trial</span>
+              <span>Quick setup</span>
             </div>
             <div className="flex items-center">
               <CheckCircle className="h-5 w-5 text-emerald-400 mr-2" />
-              <span>No credit card required</span>
+              <span>No setup fees</span>
             </div>
             <div className="flex items-center">
               <CheckCircle className="h-5 w-5 text-emerald-400 mr-2" />
-              <span>Cancel anytime</span>
+              <span>Start immediately</span>
             </div>
           </div>
         </div>

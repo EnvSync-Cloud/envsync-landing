@@ -59,9 +59,9 @@ const Onboarding = () => {
             {!isSubmitted ? (
               <Card className="bg-slate-800 border-slate-700">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-white text-2xl">Get Started Free</CardTitle>
+                  <CardTitle className="text-white text-2xl">Get Started</CardTitle>
                   <CardDescription className="text-slate-300">
-                    Enter your email to begin your 14-day free trial
+                    Enter your email to begin your journey with EnvSync
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -83,12 +83,12 @@ const Onboarding = () => {
                       className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
                       size="lg"
                     >
-                      Start Free Trial
+                      Get Started
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </form>
                   <p className="text-sm text-slate-400 text-center mt-4">
-                    No credit card required • 14-day free trial
+                    No setup fees • Start immediately
                   </p>
                 </CardContent>
               </Card>

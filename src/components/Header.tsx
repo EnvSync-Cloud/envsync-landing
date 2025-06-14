@@ -37,7 +37,6 @@ const Header = () => {
               About
             </Link>
             <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
-            <a href="#pricing" className="text-slate-300 hover:text-white transition-colors">Pricing</a>
             <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
             <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
               Sign In
@@ -74,7 +73,6 @@ const Header = () => {
                 About
               </Link>
               <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
-              <a href="#pricing" className="text-slate-300 hover:text-white transition-colors">Pricing</a>
               <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
