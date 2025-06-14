@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { CheckCircle, ArrowRight, Users, Loader2, AlertCircle, Eye, EyeOff } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "@/helpers/api";
 
 const AcceptUserInvite = () => {
@@ -15,6 +15,24 @@ const AcceptUserInvite = () => {
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  if (!invite_code) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+        <div className="text-white text-lg">Invalid invite code</div>
+      </div>
+    );
+  }
+
+  // Check if the invite code is valid
+  const { data: inviteData, isLoading: isInviteLoading, isError: isInviteError } = useQuery({
+    queryKey: ["checkInviteCode", invite_code],
+    queryFn: async () => {
+      return api.onboarding.getUserInviteByCode(invite_code);
+    },
+    enabled: !!invite_code,
+    retry: false,
+  });
 
   const acceptUserInviteMutation = useMutation({
     mutationFn: async (data: {
@@ -47,6 +65,30 @@ const AcceptUserInvite = () => {
     }
   };
 
+  if (isInviteLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+        <Loader2 className="h-8 w-8 animate-spin text-white" />
+      </div>
+    );
+  }
+
+  if (isInviteError || !inviteData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+        <div className="text-red-400 text-lg">Invalid or expired invite code</div>
+      </div>
+    );
+  }
+
+  if (inviteData.invite.is_accepted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+        <div className="text-red-400 text-lg">This invite code has already been used.</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-900">
       <Header />
@@ -58,7 +100,7 @@ const AcceptUserInvite = () => {
             {!acceptUserInviteMutation.isSuccess ? (
               <Card className="bg-slate-800 border-slate-700 shadow-xl shadow-black/20">
                 <CardHeader className="text-center">
-                  <div className="w-12 h-12 bg-emerald-600/20 p-3 rounded-lg w-fit mx-auto mb-4">
+                  <div className="w-12 h-12 bg-emerald-600/20 p-3 rounded-lg mx-auto mb-4">
                     <Users className="h-6 w-6 text-emerald-400" />
                   </div>
                   <CardTitle className="text-white text-2xl">Join the Team</CardTitle>
@@ -156,7 +198,7 @@ const AcceptUserInvite = () => {
                   </p>
                   <Button 
                     className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                    onClick={() => window.location.href = '/'}
+                    onClick={() => window.location.href = 'https://app.envsync.cloud'}
                   >
                     Start Working
                   </Button>
