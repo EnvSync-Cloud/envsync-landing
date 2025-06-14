@@ -13,9 +13,12 @@ const Hero = () => {
       
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium">
-            <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse"></span>
-            Secure environment management for modern teams
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium shadow-lg shadow-black/20">
+            <span className="relative flex size-3 mr-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1DB954] opacity-75"></span>
+              <span className="relative inline-flex size-3 rounded-full bg-[#1DB954]"></span>
+            </span>
+            <span>Now in ALPHA</span>
           </div>
         </div>
 

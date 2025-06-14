@@ -15,7 +15,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/60d31334-2dd6-4f30-8ff8-fab243033a3c.png" 
+              src="https://raw.githubusercontent.com/EnvSync-Cloud/.github/refs/heads/main/assets/Transparent/EnvSync.svg" 
               alt="EnvSync Logo" 
               className="h-8 w-8"
             />
