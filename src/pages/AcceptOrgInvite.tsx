@@ -21,14 +21,23 @@ const AcceptOrgInvite = () => {
   const [password, setPassword] = useState("");
 
   const acceptOrgInviteMutation = useMutation({
-    mutationFn: (data: {
+    mutationFn: async (data: {
       invite_code: string;
       org_name: string;
       company_size: string;
       website: string;
       full_name: string;
       password: string;
-    }) => api.onboarding.acceptOrgInvite(data),
+    }) => {
+      // Call the API with the invite_code as the main parameter and other data as body
+      return api.onboarding.acceptOrgInvite(data.invite_code, {
+        org_name: data.org_name,
+        company_size: data.company_size,
+        website: data.website,
+        full_name: data.full_name,
+        password: data.password
+      });
+    },
     onSuccess: (data) => {
       console.log("Organization invite accepted successfully:", data);
     },

@@ -17,11 +17,17 @@ const AcceptUserInvite = () => {
   const [password, setPassword] = useState("");
 
   const acceptUserInviteMutation = useMutation({
-    mutationFn: (data: {
+    mutationFn: async (data: {
       invite_code: string;
       full_name: string;
       password: string;
-    }) => api.onboarding.acceptUserInvite(data),
+    }) => {
+      // Call the API with the invite_code as the main parameter and other data as body
+      return api.onboarding.acceptUserInvite(data.invite_code, {
+        full_name: data.full_name,
+        password: data.password
+      });
+    },
     onSuccess: (data) => {
       console.log("User invite accepted successfully:", data);
     },
