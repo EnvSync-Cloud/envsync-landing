@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -19,6 +20,9 @@ const Header = () => {
               className="h-8 w-8"
             />
             <span className="text-xl font-bold text-white">EnvSync</span>
+            <Badge className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-2 py-1 text-xs shadow-lg shadow-orange-500/50">
+              ALPHA
+            </Badge>
           </Link>
           
           <nav className="hidden md:flex items-center space-x-8">

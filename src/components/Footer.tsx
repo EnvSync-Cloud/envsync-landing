@@ -1,5 +1,6 @@
 
 import { Shield, Twitter, Github, Linkedin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const Footer = () => {
   return (
@@ -10,6 +11,9 @@ const Footer = () => {
             <div className="flex items-center space-x-2 mb-4">
               <Shield className="h-8 w-8 text-emerald-400" />
               <span className="text-xl font-bold text-white">EnvSync</span>
+              <Badge className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-2 py-1 text-xs shadow-lg shadow-orange-500/50">
+                ALPHA
+              </Badge>
             </div>
             <p className="text-slate-300 mb-6">
               Secure environment management for modern development teams.
