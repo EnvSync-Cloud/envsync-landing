@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { CheckCircle, ArrowRight, Users, Loader2, AlertCircle } from "lucide-react";
+import { CheckCircle, ArrowRight, Users, Loader2, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/helpers/api";
 
@@ -14,6 +14,7 @@ const AcceptUserInvite = () => {
   const { invite_code } = useParams();
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const acceptUserInviteMutation = useMutation({
     mutationFn: async (data: {
@@ -83,16 +84,29 @@ const AcceptUserInvite = () => {
 
                     <div>
                       <Label htmlFor="password" className="text-slate-300">Password</Label>
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Create a strong password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        disabled={acceptUserInviteMutation.isPending}
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-emerald-500"
-                      />
+                      <div className="relative">
+                        <Input
+                          id="password"
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Create a strong password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          disabled={acceptUserInviteMutation.isPending}
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-emerald-500 pr-12"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300 focus:outline-none"
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-4 w-4" />
+                          ) : (
+                            <Eye className="h-4 w-4" />
+                          )}
+                        </button>
+                      </div>
                     </div>
                     
                     {acceptUserInviteMutation.isError && (
