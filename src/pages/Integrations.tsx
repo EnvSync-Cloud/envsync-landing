@@ -12,7 +12,7 @@ const Integrations = () => {
       name: "Slack",
       description: "Get real-time notifications about environment changes and security alerts directly in your Slack channels.",
       icon: Slack,
-      status: "available",
+      status: "coming-soon",
       color: "text-slate-300",
       bgColor: "bg-slate-800"
     },
@@ -20,7 +20,7 @@ const Integrations = () => {
       name: "Discord",
       description: "Receive instant updates and alerts about your environment variables in your Discord server.",
       icon: MessageCircle,
-      status: "available", 
+      status: "coming-soon", 
       color: "text-slate-300",
       bgColor: "bg-slate-800"
     }
@@ -83,7 +83,7 @@ const Integrations = () => {
             
             <div className="grid md:grid-cols-2 gap-6">
               {notificationIntegrations.map((integration) => (
-                <Card key={integration.name} className="bg-slate-800 border-slate-700 hover:shadow-lg transition-shadow">
+                <Card key={integration.name} className="bg-slate-800 border-slate-700 hover:shadow-lg transition-shadow opacity-75">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -92,8 +92,8 @@ const Integrations = () => {
                         </div>
                         <CardTitle className="text-xl text-white">{integration.name}</CardTitle>
                       </div>
-                      <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-200">
-                        Available
+                      <Badge variant="outline" className="text-slate-400 border-slate-600">
+                        Coming Soon
                       </Badge>
                     </div>
                     <CardDescription className="text-base text-slate-300">
@@ -101,8 +101,8 @@ const Integrations = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                      Connect {integration.name}
+                    <Button disabled variant="outline" className="w-full border-slate-600 text-slate-400">
+                      Coming Soon
                     </Button>
                   </CardContent>
                 </Card>
