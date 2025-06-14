@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
@@ -24,17 +25,21 @@ const CTA = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold">
-              Get Started
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button 
+            <Link to="/onboarding">
+              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold">
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link to="https://calendly.com/bravo68web/envsync-intro-clone">
+            <Button
               size="lg" 
               variant="outline" 
-              className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-4 text-lg"
+              className="border-slate-700 hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg text-black"
             >
               Schedule demo
             </Button>
+            </Link>
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-slate-300">

@@ -3,14 +3,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Shield, Users, Target, Award, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const About = () => {
-  const stats = [
-    { value: "50K+", label: "Developers Trust Us" },
-    { value: "99.9%", label: "Uptime Guarantee" },
-    { value: "500+", label: "Enterprise Customers" },
-    { value: "24/7", label: "Expert Support" }
-  ];
+  // const stats = [
+  //   { value: "50K+", label: "Developers Trust Us" },
+  //   { value: "99.9%", label: "Uptime Guarantee" },
+  //   { value: "500+", label: "Enterprise Customers" },
+  //   { value: "24/7", label: "Expert Support" }
+  // ];
 
   const values = [
     {
@@ -37,20 +38,11 @@ const About = () => {
 
   const team = [
     {
-      name: "Alex Rodriguez",
-      role: "CEO & Co-founder",
-      bio: "Former security architect at major tech companies, passionate about developer tooling."
+      name: "Jyotirmoy Bandyopadhayaya",
+      role: "founder",
+      github: "BRAVO68WEB",
+      bio: "A seasoned software engineer with over 4 years of experience in building scalable systems and developer tools.",
     },
-    {
-      name: "Sarah Chen",
-      role: "CTO & Co-founder",
-      bio: "Ex-infrastructure engineer with 10+ years building scalable distributed systems."
-    },
-    {
-      name: "Marcus Johnson",
-      role: "Head of Product",
-      bio: "Product leader focused on creating delightful developer experiences."
-    }
   ];
 
   return (
@@ -72,7 +64,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section
       <section className="py-16 bg-slate-800/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -88,7 +80,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Mission Section */}
       <section className="py-20">
@@ -153,10 +145,16 @@ const About = () => {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex flex-wrap justify-center gap-8">
               {team.map((member, index) => (
-                <div key={index} className="bg-slate-800 rounded-xl p-8 text-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-blue-400 rounded-full mx-auto mb-6"></div>
+                <div key={index} className="bg-slate-800 rounded-xl p-8 text-center max-w-sm">
+                  <div className="mb-4">
+                    <img 
+                      src={`https://github.com/${member.github}.png?size=200`}
+                      alt={`${member.name}'s avatar`}
+                      className="w-24 h-24 rounded-full mx-auto mb-4"
+                    />
+                  </div>
                   <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
                   <p className="text-emerald-400 mb-4">{member.role}</p>
                   <p className="text-slate-300 text-sm">{member.bio}</p>
@@ -178,17 +176,12 @@ const About = () => {
               Experience the future of environment variable management today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4">
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-4"
-              >
-                Contact Sales
-              </Button>
+              <Link to="/onboarding">
+                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4">
+                  Start Free
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -26,11 +26,6 @@ const features = [
     icon: Users,
     title: "Team collaboration",
     description: "Share secrets securely with team members using role-based permissions and audit logs."
-  },
-  {
-    icon: Lock,
-    title: "Compliance ready",
-    description: "SOC 2, GDPR, and HIPAA compliant. Built with enterprise security requirements in mind."
   }
 ];
 
@@ -52,11 +47,11 @@ const Features = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="group relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 hover:bg-slate-800/80 transition-all duration-300 hover:scale-105"
+              className="group relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 hover:bg-slate-800/80 transition-all duration-300 hover:scale-105 w-full md:w-80 lg:w-96"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative">
@@ -69,6 +64,7 @@ const Features = () => {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

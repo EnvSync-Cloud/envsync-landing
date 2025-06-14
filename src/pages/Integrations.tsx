@@ -1,17 +1,17 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Slack, MessageCircle, Shield, Cloud, Zap } from "lucide-react";
+import { MessageCircle, Shield, Cloud, Zap, Disc } from "lucide-react";
 
 const Integrations = () => {
   const notificationIntegrations = [
     {
       name: "Slack",
       description: "Get real-time notifications about environment changes and security alerts directly in your Slack channels.",
-      icon: Slack,
+      icon: "/images/Slack.svg",
       status: "coming-soon",
       color: "text-slate-300",
       bgColor: "bg-slate-800"
@@ -19,7 +19,7 @@ const Integrations = () => {
     {
       name: "Discord",
       description: "Receive instant updates and alerts about your environment variables in your Discord server.",
-      icon: MessageCircle,
+      icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Discord.svg",
       status: "coming-soon", 
       color: "text-slate-300",
       bgColor: "bg-slate-800"
@@ -30,7 +30,7 @@ const Integrations = () => {
     {
       name: "Vercel",
       description: "Seamlessly sync your environment variables with Vercel deployments.",
-      icon: Zap,
+      icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Vercel-Dark.svg",
       status: "coming-soon",
       color: "text-slate-300",
       bgColor: "bg-slate-800"
@@ -38,15 +38,31 @@ const Integrations = () => {
     {
       name: "CloudFlare",
       description: "Integrate with CloudFlare Workers and Pages for secure environment management.",
-      icon: Cloud,
+      icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Cloudflare-Dark.svg",
       status: "coming-soon",
-      color: "text-slate-300", 
+      color: "text-slate-300",
       bgColor: "bg-slate-800"
     },
     {
       name: "AWS",
       description: "Connect with AWS services for enterprise-grade secret management.",
-      icon: Shield,
+      icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/AWS-Dark.svg",
+      status: "coming-soon",
+      color: "text-slate-300",
+      bgColor: "bg-slate-800"
+    },
+    {
+      name: "Github Actions",
+      description: "Automate your CI/CD workflows with secure environment variable management.",
+      icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/GithubActions-Dark.svg",
+      status: "coming-soon",
+      color: "text-slate-300",
+      bgColor: "bg-slate-800"
+    },
+    {
+      name: "Vercel",
+      description: "Seamlessly sync your environment variables with Vercel deployments.",
+      icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Vercel-Dark.svg",
       status: "coming-soon",
       color: "text-slate-300",
       bgColor: "bg-slate-800"
@@ -88,7 +104,7 @@ const Integrations = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${integration.bgColor}`}>
-                          <integration.icon className={`h-6 w-6 ${integration.color}`} />
+                          <img src={integration.icon} alt={`${integration.name} icon`} className={`h-6 w-6 ${integration.color}`} />
                         </div>
                         <CardTitle className="text-xl text-white">{integration.name}</CardTitle>
                       </div>
@@ -100,11 +116,6 @@ const Integrations = () => {
                       {integration.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <Button disabled variant="outline" className="w-full border-slate-600 text-slate-400">
-                      Coming Soon
-                    </Button>
-                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -129,7 +140,7 @@ const Integrations = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${integration.bgColor}`}>
-                          <integration.icon className={`h-6 w-6 ${integration.color}`} />
+                          <img src={integration.icon} alt={`${integration.name} icon`} className={`h-6 w-6 ${integration.color}`} />
                         </div>
                         <CardTitle className="text-xl text-white">{integration.name}</CardTitle>
                       </div>
@@ -141,11 +152,6 @@ const Integrations = () => {
                       {integration.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <Button disabled variant="outline" className="w-full border-slate-600 text-slate-400">
-                      Coming Soon
-                    </Button>
-                  </CardContent>
                 </Card>
               ))}
             </div>

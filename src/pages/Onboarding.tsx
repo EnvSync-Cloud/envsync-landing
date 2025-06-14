@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,17 +5,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
-import { CheckCircle, ArrowRight, Shield, Zap, Users } from "lucide-react";
+import { CheckCircle, ArrowRight, Shield, Zap, Users, Loader2, AlertCircle } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { api } from "@/helpers/api";
 
 const Onboarding = () => {
   const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const createOrgInviteMutation = useMutation({
+    mutationFn: (email: string) => api.onboarding.createOrgInvite({ email }),
+    onSuccess: (data) => {
+      console.log("Organization invite created successfully:", data);
+    },
+    onError: (error) => {
+      console.error("Failed to create organization invite:", error);
+    }
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      console.log("Email submitted:", email);
+    if (email && !createOrgInviteMutation.isPending) {
+      createOrgInviteMutation.mutate(email);
     }
   };
 
@@ -56,8 +65,8 @@ const Onboarding = () => {
           </div>
 
           <div className="max-w-md mx-auto">
-            {!isSubmitted ? (
-              <Card className="bg-slate-800 border-slate-700">
+            {!createOrgInviteMutation.isSuccess ? (
+              <Card className="bg-slate-800 border-slate-700 shadow-xl shadow-black/20">
                 <CardHeader className="text-center">
                   <CardTitle className="text-white text-2xl">Get Started</CardTitle>
                   <CardDescription className="text-slate-300">
@@ -75,16 +84,39 @@ const Onboarding = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-emerald-500"
+                        disabled={createOrgInviteMutation.isPending}
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-emerald-500 disabled:opacity-50"
                       />
                     </div>
+                    
+                    {createOrgInviteMutation.isError && (
+                      <div className="flex items-center gap-2 text-red-400 text-sm">
+                        <AlertCircle className="h-4 w-4" />
+                        <span>
+                          {createOrgInviteMutation.error instanceof Error 
+                            ? createOrgInviteMutation.error.message 
+                            : "Something went wrong. Please try again."}
+                        </span>
+                      </div>
+                    )}
+                    
                     <Button 
                       type="submit" 
-                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
                       size="lg"
+                      disabled={createOrgInviteMutation.isPending || !email}
                     >
-                      Get Started
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      {createOrgInviteMutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Creating Invite...
+                        </>
+                      ) : (
+                        <>
+                          Get Started
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </>
+                      )}
                     </Button>
                   </form>
                   <p className="text-sm text-slate-400 text-center mt-4">
@@ -102,12 +134,24 @@ const Onboarding = () => {
                   <p className="text-slate-300 mb-6">
                     We've sent you an email at <span className="text-emerald-400">{email}</span> with your next steps.
                   </p>
-                  <Button 
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                    onClick={() => window.open('mailto:', '_blank')}
-                  >
-                    Check Your Email
-                  </Button>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Button 
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                      onClick={() => window.open('mailto:', '_blank')}
+                    >
+                      Check Your Email
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="border-slate-700 text-black hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg"
+                      onClick={() => {
+                        setEmail("");
+                        createOrgInviteMutation.reset();
+                      }}
+                    >
+                      Submit Another Email
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             )}

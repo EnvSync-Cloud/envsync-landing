@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import Globe from "./Globe";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -40,18 +41,22 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold">
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg text-black"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch demo
-              </Button>
+              <Link to="/onboarding">
+                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold">
+                  Get Started
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/demo">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-slate-700 hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg text-black"
+                >
+                  <Play className="mr-2 h-5 w-5" />
+                  Watch demo
+                </Button>
+              </Link>
             </div>
           </div>
 

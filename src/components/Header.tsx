@@ -47,7 +47,7 @@ const Header = () => {
               Integrations
             </Link>
             <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
-            <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-200">
+            <Button variant="outline" className="border-slate-700 text-black">
               Sign In
             </Button>
             <Link to="/onboarding">
