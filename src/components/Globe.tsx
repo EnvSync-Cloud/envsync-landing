@@ -23,6 +23,7 @@ const mockActivities: ActivityItem[] = [
 
 const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const globeRef = useRef<any>(null);
   const [currentActivity, setCurrentActivity] = useState(0);
   const [visibleActivities, setVisibleActivities] = useState<ActivityItem[]>([]);
 
@@ -50,10 +51,17 @@ const Globe = () => {
 
     let phi = 0;
     
-    const globe = createGlobe(canvas, {
+    // Create markers once and reuse
+    const createMarkers = (activeIndex: number) => 
+      mockActivities.map((activity, index) => ({
+        location: [activity.lat, activity.lng],
+        size: index === activeIndex ? 0.08 : 0.04,
+      }));
+    
+    globeRef.current = createGlobe(canvas, {
       devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      width: 320 * 2, // Match display size
+      height: 320 * 2, // Match display size
       phi: 0,
       theta: 0.3,
       dark: 1,
@@ -63,26 +71,33 @@ const Globe = () => {
       baseColor: [0.3, 0.3, 0.3],
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
-      markers: mockActivities.map((activity, index) => ({
-        location: [activity.lat, activity.lng],
-        size: index === currentActivity ? 0.1 : 0.05,
-      })),
+      markers: createMarkers(currentActivity),
       onRender: (state) => {
-        // Auto-rotate the globe
-        phi += 0.01;
+        // Slower, smoother rotation
+        phi += 0.003;
         state.phi = phi;
-        
-        // Update marker sizes based on current activity
-        state.markers = mockActivities.map((activity, index) => ({
-          location: [activity.lat, activity.lng],
-          size: index === currentActivity ? 0.1 : 0.05,
-        }));
       }
     });
 
     return () => {
-      globe.destroy();
+      if (globeRef.current) {
+        globeRef.current.destroy();
+        globeRef.current = null;
+      }
     };
+  }, []); // Remove currentActivity dependency to prevent recreation
+
+  // Update markers when activity changes without recreating globe
+  useEffect(() => {
+    if (globeRef.current) {
+      const newMarkers = mockActivities.map((activity, index) => ({
+        location: [activity.lat, activity.lng],
+        size: index === currentActivity ? 0.08 : 0.04,
+      }));
+      
+      // Update markers directly
+      globeRef.current.updateMarkers?.(newMarkers);
+    }
   }, [currentActivity]);
 
   return (
