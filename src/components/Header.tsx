@@ -38,9 +38,11 @@ const Header = () => {
             <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
               Sign In
             </Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-              Get Started
-            </Button>
+            <Link to="/onboarding">
+              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                Get Started
+              </Button>
+            </Link>
           </nav>
 
           <div className="md:hidden">
@@ -74,9 +76,11 @@ const Header = () => {
                 <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
                   Sign In
                 </Button>
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  Get Started
-                </Button>
+                <Link to="/onboarding">
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>
