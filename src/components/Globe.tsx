@@ -88,13 +88,22 @@ const Globe = () => {
         ctx.stroke();
       }
       
-      // Horizontal lines
+      // Horizontal lines - Fixed to prevent negative radius
       for (let i = 1; i < 4; i++) {
         const y = centerY - radius + (i * radius * 2) / 4;
-        const ellipseRadius = Math.sqrt(radius * radius - Math.pow(y - centerY, 2));
-        ctx.beginPath();
-        ctx.ellipse(centerX, y, ellipseRadius, ellipseRadius * 0.3, 0, 0, Math.PI * 2);
-        ctx.stroke();
+        const distanceFromCenter = Math.abs(y - centerY);
+        
+        // Only draw if we're within the circle bounds
+        if (distanceFromCenter < radius) {
+          const ellipseRadius = Math.sqrt(Math.max(0, radius * radius - Math.pow(distanceFromCenter, 2)));
+          
+          // Only draw if we have a valid positive radius
+          if (ellipseRadius > 0) {
+            ctx.beginPath();
+            ctx.ellipse(centerX, y, ellipseRadius, ellipseRadius * 0.3, 0, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        }
       }
 
       // Draw location blips
