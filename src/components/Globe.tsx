@@ -83,25 +83,37 @@ const Globe = () => {
       // Vertical lines
       for (let i = 0; i < 8; i++) {
         const angle = (i * Math.PI) / 4;
-        ctx.beginPath();
-        ctx.ellipse(centerX, centerY, radius * Math.cos(angle), radius, 0, 0, Math.PI * 2);
-        ctx.stroke();
+        const ellipseRadiusX = Math.abs(radius * Math.cos(angle));
+        
+        // Only draw if radius is positive and valid
+        if (ellipseRadiusX > 1 && radius > 1) {
+          ctx.beginPath();
+          ctx.ellipse(centerX, centerY, ellipseRadiusX, radius, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        }
       }
       
-      // Horizontal lines - Fixed to prevent negative radius
+      // Horizontal lines - Enhanced validation to prevent negative radius
       for (let i = 1; i < 4; i++) {
         const y = centerY - radius + (i * radius * 2) / 4;
         const distanceFromCenter = Math.abs(y - centerY);
         
-        // Only draw if we're within the circle bounds
-        if (distanceFromCenter < radius) {
-          const ellipseRadius = Math.sqrt(Math.max(0, radius * radius - Math.pow(distanceFromCenter, 2)));
+        // Only proceed if we're well within the circle bounds
+        if (distanceFromCenter < radius * 0.95) {
+          const radiusSquared = radius * radius;
+          const distanceSquared = distanceFromCenter * distanceFromCenter;
           
-          // Only draw if we have a valid positive radius
-          if (ellipseRadius > 0) {
-            ctx.beginPath();
-            ctx.ellipse(centerX, y, ellipseRadius, ellipseRadius * 0.3, 0, 0, Math.PI * 2);
-            ctx.stroke();
+          // Calculate ellipse radius with extra safety checks
+          if (radiusSquared > distanceSquared) {
+            const ellipseRadius = Math.sqrt(radiusSquared - distanceSquared);
+            const ellipseRadiusY = ellipseRadius * 0.3;
+            
+            // Triple check: ensure both radii are positive and reasonable
+            if (ellipseRadius > 1 && ellipseRadiusY > 0.1) {
+              ctx.beginPath();
+              ctx.ellipse(centerX, y, ellipseRadius, ellipseRadiusY, 0, 0, Math.PI * 2);
+              ctx.stroke();
+            }
           }
         }
       }
