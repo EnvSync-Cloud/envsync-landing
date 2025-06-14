@@ -54,7 +54,7 @@ const Globe = () => {
     // Create markers once and reuse
     const createMarkers = (activeIndex: number) => 
       mockActivities.map((activity, index) => ({
-        location: [activity.lat, activity.lng],
+        location: [activity.lat, activity.lng] as [number, number],
         size: index === activeIndex ? 0.08 : 0.04,
       }));
     
@@ -91,7 +91,7 @@ const Globe = () => {
   useEffect(() => {
     if (globeRef.current) {
       const newMarkers = mockActivities.map((activity, index) => ({
-        location: [activity.lat, activity.lng],
+        location: [activity.lat, activity.lng] as [number, number],
         size: index === currentActivity ? 0.08 : 0.04,
       }));
       
