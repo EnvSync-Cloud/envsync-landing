@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
+import Globe from "./Globe";
 
 const Hero = () => {
   return (
@@ -45,25 +46,12 @@ const Hero = () => {
             </Button>
           </div>
           
-          {/* Dashboard preview */}
-          <div className="relative max-w-5xl mx-auto">
-            <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-3xl blur-xl" />
-            <div className="relative bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
-              <div className="flex items-center space-x-2 px-6 py-4 bg-slate-800 border-b border-slate-700">
-                <div className="w-3 h-3 bg-red-500 rounded-full" />
-                <div className="w-3 h-3 bg-yellow-500 rounded-full" />
-                <div className="w-3 h-3 bg-green-500 rounded-full" />
-                <div className="ml-4 text-slate-400 text-sm font-mono">envsync.dev/dashboard</div>
-              </div>
-              <div className="h-96 bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <div className="w-8 h-8 bg-emerald-400 rounded-lg" />
-                  </div>
-                  <h3 className="text-white text-xl font-semibold mb-2">Dashboard Preview</h3>
-                  <p className="text-slate-400">Clean, intuitive interface for managing secrets</p>
-                </div>
-              </div>
+          {/* Globe with Team Activity */}
+          <div className="relative">
+            <Globe />
+            <div className="text-center mt-8">
+              <h3 className="text-white text-xl font-semibold mb-2">Global Team Collaboration</h3>
+              <p className="text-slate-400">See your team's secret management activity in real-time</p>
             </div>
           </div>
         </div>
