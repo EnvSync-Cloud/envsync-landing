@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -23,19 +22,20 @@ const AcceptOrgInvite = () => {
   const acceptOrgInviteMutation = useMutation({
     mutationFn: async (data: {
       invite_code: string;
-      orgName: string;
-      companySize: string;
-      website: string;
-      fullName: string;
-      password: string;
+      org_data: {
+        name: string;
+        size: string;
+        website: string;
+      };
+      user_data: {
+        full_name: string;
+        password: string;
+      };
     }) => {
       // Call the API with the invite_code as the main parameter and other data as body
       return api.onboarding.acceptOrgInvite(data.invite_code, {
-        orgName: data.orgName,
-        companySize: data.companySize,
-        website: data.website,
-        fullName: data.fullName,
-        password: data.password
+        org_data: data.org_data,
+        user_data: data.user_data
       });
     },
     onSuccess: (data) => {
@@ -51,11 +51,15 @@ const AcceptOrgInvite = () => {
     if (invite_code && orgName && companySize && fullName && password && !acceptOrgInviteMutation.isPending) {
       acceptOrgInviteMutation.mutate({
         invite_code,
-        orgName,
-        companySize,
-        website,
-        fullName,
-        password
+        org_data: {
+          name: orgName,
+          size: companySize,
+          website: website || "https://example.com"
+        },
+        user_data: {
+          full_name: fullName,
+          password
+        }
       });
     }
   };
