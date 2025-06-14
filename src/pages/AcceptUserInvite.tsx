@@ -19,12 +19,12 @@ const AcceptUserInvite = () => {
   const acceptUserInviteMutation = useMutation({
     mutationFn: async (data: {
       invite_code: string;
-      full_name: string;
+      fullName: string;
       password: string;
     }) => {
       // Call the API with the invite_code as the main parameter and other data as body
       return api.onboarding.acceptUserInvite(data.invite_code, {
-        full_name: data.full_name,
+        fullName: data.fullName,
         password: data.password
       });
     },
@@ -41,7 +41,7 @@ const AcceptUserInvite = () => {
     if (invite_code && fullName && password && !acceptUserInviteMutation.isPending) {
       acceptUserInviteMutation.mutate({
         invite_code,
-        full_name: fullName,
+        fullName,
         password
       });
     }
