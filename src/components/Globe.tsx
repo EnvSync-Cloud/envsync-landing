@@ -1,5 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
+import createGlobe from "cobe";
 
 interface ActivityItem {
   id: number;
@@ -47,109 +48,40 @@ const Globe = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const resizeCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const centerX = canvas.width / (2 * window.devicePixelRatio);
-    const centerY = canvas.height / (2 * window.devicePixelRatio);
-    const radius = Math.min(centerX, centerY) - 20;
-
-    let animationFrame: number;
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-
-      // Draw globe outline
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = '#34d399';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Draw grid lines
-      ctx.strokeStyle = '#1f2937';
-      ctx.lineWidth = 1;
-      
-      // Vertical lines
-      for (let i = 0; i < 8; i++) {
-        const angle = (i * Math.PI) / 4;
-        const ellipseRadiusX = Math.abs(radius * Math.cos(angle));
+    let phi = 0;
+    
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: 2,
+      width: 600 * 2,
+      height: 600 * 2,
+      phi: 0,
+      theta: 0.3,
+      dark: 1,
+      diffuse: 1.2,
+      mapSamples: 16000,
+      mapBrightness: 6,
+      baseColor: [0.3, 0.3, 0.3],
+      markerColor: [0.1, 0.8, 1],
+      glowColor: [1, 1, 1],
+      markers: mockActivities.map((activity, index) => ({
+        location: [activity.lat, activity.lng],
+        size: index === currentActivity ? 0.1 : 0.05,
+      })),
+      onRender: (state) => {
+        // Auto-rotate the globe
+        phi += 0.01;
+        state.phi = phi;
         
-        // Only draw if radius is positive and valid
-        if (ellipseRadiusX > 1 && radius > 1) {
-          ctx.beginPath();
-          ctx.ellipse(centerX, centerY, ellipseRadiusX, radius, 0, 0, Math.PI * 2);
-          ctx.stroke();
-        }
+        // Update marker sizes based on current activity
+        state.markers = mockActivities.map((activity, index) => ({
+          location: [activity.lat, activity.lng],
+          size: index === currentActivity ? 0.1 : 0.05,
+        }));
       }
-      
-      // Horizontal lines - Enhanced validation to prevent negative radius
-      for (let i = 1; i < 4; i++) {
-        const y = centerY - radius + (i * radius * 2) / 4;
-        const distanceFromCenter = Math.abs(y - centerY);
-        
-        // Only proceed if we're well within the circle bounds
-        if (distanceFromCenter < radius * 0.95) {
-          const radiusSquared = radius * radius;
-          const distanceSquared = distanceFromCenter * distanceFromCenter;
-          
-          // Calculate ellipse radius with extra safety checks
-          if (radiusSquared > distanceSquared) {
-            const ellipseRadius = Math.sqrt(radiusSquared - distanceSquared);
-            const ellipseRadiusY = ellipseRadius * 0.3;
-            
-            // Triple check: ensure both radii are positive and reasonable
-            if (ellipseRadius > 1 && ellipseRadiusY > 0.1) {
-              ctx.beginPath();
-              ctx.ellipse(centerX, y, ellipseRadius, ellipseRadiusY, 0, 0, Math.PI * 2);
-              ctx.stroke();
-            }
-          }
-        }
-      }
-
-      // Draw location blips
-      mockActivities.forEach((activity, index) => {
-        const isActive = index === currentActivity;
-        const x = centerX + (activity.lng / 180) * radius * 0.8;
-        const y = centerY - (activity.lat / 90) * radius * 0.8;
-
-        // Pulse effect for active location
-        if (isActive) {
-          const pulseRadius = 8 + Math.sin(Date.now() * 0.01) * 3;
-          ctx.beginPath();
-          ctx.arc(x, y, pulseRadius, 0, Math.PI * 2);
-          ctx.fillStyle = '#34d399';
-          ctx.globalAlpha = 0.3;
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
-
-        // Location dot
-        ctx.beginPath();
-        ctx.arc(x, y, isActive ? 4 : 2, 0, Math.PI * 2);
-        ctx.fillStyle = isActive ? '#10b981' : '#6b7280';
-        ctx.fill();
-      });
-
-      animationFrame = requestAnimationFrame(animate);
-    };
-
-    animate();
+    });
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrame);
+      globe.destroy();
     };
   }, [currentActivity]);
 
