@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -13,7 +13,11 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <Shield className="h-8 w-8 text-emerald-400" />
+            <img 
+              src="/lovable-uploads/60d31334-2dd6-4f30-8ff8-fab243033a3c.png" 
+              alt="EnvSync Logo" 
+              className="h-8 w-8"
+            />
             <span className="text-xl font-bold text-white">EnvSync</span>
           </Link>
           
