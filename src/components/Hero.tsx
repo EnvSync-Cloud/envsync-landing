@@ -5,7 +5,7 @@ import Globe from "./Globe";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <section className="h-fit bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/20 rounded-full blur-3xl" />
@@ -44,7 +44,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg text-black"
               >
                 <Play className="mr-2 h-5 w-5" />
                 Watch demo

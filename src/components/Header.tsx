@@ -38,7 +38,7 @@ const Header = () => {
             </Link>
             <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
             <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
-            <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
+            <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800 text-black hover:text-slate-200">
               Sign In
             </Button>
             <Link to="/onboarding">
