@@ -9,6 +9,8 @@ import About from "./pages/About";
 import Onboarding from "./pages/Onboarding";
 import Integrations from "./pages/Integrations";
 import NotFound from "./pages/NotFound";
+import AcceptOrgInvite from "./pages/AcceptOrgInvite";
+import AcceptUserInvite from "./pages/AcceptUserInvite";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/onboarding/accept-org-invite/:invite_code" element={<AcceptOrgInvite />} />
+          <Route path="/onboarding/accept-user-invite/:invite_code" element={<AcceptUserInvite />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
