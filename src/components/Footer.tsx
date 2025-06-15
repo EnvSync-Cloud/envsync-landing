@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="https://raw.githubusercontent.com/EnvSync-Cloud/.github/refs/heads/main/assets/Transparent/EnvSync.svg" 
+                src="/EnvSync.svg" 
                 alt="EnvSync Logo" 
                 className="h-8 w-8"
               />

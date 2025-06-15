@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { CheckCircle, ArrowRight, Shield, Loader2, AlertCircle, Eye, EyeOff } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "@/helpers/api";
 
 const AcceptOrgInvite = () => {
@@ -19,6 +19,25 @@ const AcceptOrgInvite = () => {
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  // Ensure invite_code is defined
+  if (!invite_code || typeof invite_code !== "string") {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-white text-lg">Invalid or missing invite code.</div>
+      </div>
+    );
+  }
+
+  // check if the invite code is valid
+  const { data: inviteData, isLoading: isInviteLoading, isError: isInviteError } = useQuery({
+    queryKey: ["checkInviteCode", invite_code],
+    queryFn: async () => {
+      return api.onboarding.getOrgInviteByCode(invite_code);
+    },
+    retry: false,
+    enabled: !!invite_code
+  });
 
   const acceptOrgInviteMutation = useMutation({
     mutationFn: async (data: {
@@ -74,6 +93,30 @@ const AcceptOrgInvite = () => {
     "1000+ employees"
   ];
 
+  if (isInviteLoading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-white" />
+      </div>
+    );
+  }
+
+  if (isInviteError || !inviteData) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-red-400 text-lg">Invalid or expired invite code.</div>
+      </div>
+    );
+  }
+
+  if (inviteData.invite.is_accepted) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-red-400 text-lg">This invite code has already been used or is invalid.</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-900">
       <Header />
@@ -85,7 +128,7 @@ const AcceptOrgInvite = () => {
             {!acceptOrgInviteMutation.isSuccess ? (
               <Card className="bg-slate-800 border-slate-700 shadow-xl shadow-black/20">
                 <CardHeader className="text-center">
-                  <div className="w-12 h-12 bg-emerald-600/20 p-3 rounded-lg w-fit mx-auto mb-4">
+                  <div className="w-12 h-12 bg-emerald-600/20 p-3 rounded-lg mx-auto mb-4">
                     <Shield className="h-6 w-6 text-emerald-400" />
                   </div>
                   <CardTitle className="text-white text-2xl">Complete Organization Setup</CardTitle>
@@ -223,7 +266,7 @@ const AcceptOrgInvite = () => {
                   </p>
                   <Button 
                     className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                    onClick={() => window.location.href = '/'}
+                    onClick={() => window.location.href = 'https://app.envsync.cloud'}
                   >
                     Get Started
                   </Button>
