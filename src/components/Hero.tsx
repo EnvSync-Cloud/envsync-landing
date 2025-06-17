@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import Globe from "./Globe";
 import { Link } from "react-router-dom";
 
@@ -47,14 +47,14 @@ const Hero = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link to="/demo">
+              <Link to="https://github.com/envsync-cloud">
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-slate-700 hover:bg-slate-800 hover:text-slate-200 px-8 py-4 text-lg text-black"
+                  className="border-slate-700 px-8 py-4 text-lg text-black"
                 >
-                  <Play className="mr-2 h-5 w-5" />
-                  Watch demo
+                  <Github className="mr-2 h-5 w-5" />
+                  Checkout our GitHub
                 </Button>
               </Link>
             </div>
