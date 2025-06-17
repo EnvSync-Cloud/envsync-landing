@@ -39,7 +39,7 @@ const About = () => {
   const team = [
     {
       name: "Jyotirmoy Bandyopadhayaya",
-      role: "founder",
+      role: "Founder",
       github: "BRAVO68WEB",
       bio: "A seasoned software engineer with over 4 years of experience in building scalable systems and developer tools.",
     },
@@ -150,7 +150,7 @@ const About = () => {
                 <div key={index} className="bg-slate-800 rounded-xl p-8 text-center max-w-sm">
                   <div className="mb-4">
                     <img 
-                      src={`https://github.com/${member.github}.png?size=200`}
+                      src={`https://safe.b68dev.xyz/XH5ClBR3.jpg`}
                       alt={`${member.name}'s avatar`}
                       className="w-24 h-24 rounded-full mx-auto mb-4"
                     />
