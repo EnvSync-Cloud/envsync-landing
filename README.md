@@ -137,7 +137,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 💬 Support & Community
 
 - 📧 **Email:** hi@envsync.cloud
-- 📖 **Blog:** [docs.envsync.cloud](https://blog.envsync.cloud)
+- 📖 **Blog:** [blog.envsync.cloud](https://blog.envsync.cloud)
 
 ---
 

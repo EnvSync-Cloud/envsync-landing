@@ -4,13 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle, ArrowRight, Shield, Zap, Users, Loader2, AlertCircle } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/helpers/api";
 
 const Onboarding = () => {
   const [email, setEmail] = useState("");
+
+  // Auto scroll to the form when the component mounts
+  useEffect(() => {
+    const formElement = document.getElementById("onboarding-form");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   const createOrgInviteMutation = useMutation({
     mutationFn: (email: string) => api.onboarding.createOrgInvite({ email }),
@@ -52,7 +60,7 @@ const Onboarding = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <section className="pt-24 pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" id="onboarding-form">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:40px_40px]" />
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center mb-12">
