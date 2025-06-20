@@ -46,7 +46,7 @@ const Header = () => {
             >
               Integrations
             </Link>
-            <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
+            <a href="https://blog.envsync.cloud" className="text-slate-300 hover:text-white transition-colors">Blog</a>
             <Button variant="outline" className="border-slate-700 text-black">
               Sign In
             </Button>
@@ -92,7 +92,7 @@ const Header = () => {
               >
                 Integrations
               </Link>
-              <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
+              <a href="https://blog.envsync.cloud" className="text-slate-300 hover:text-white transition-colors">Blog</a>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
                   Sign In

@@ -39,7 +39,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
-              <li><a href="https://docs.envsync.cloud" className="text-slate-300 hover:text-white transition-colors">Documentation</a></li>
+              <li><a href="https://blog.envsync.cloud" className="text-slate-300 hover:text-white transition-colors">Blog</a></li>
               <li><a href="https://api.envsync.cloud/docs" className="text-slate-300 hover:text-white transition-colors">API Reference</a></li>
             </ul>
           </div>

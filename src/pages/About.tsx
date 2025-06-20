@@ -41,8 +41,23 @@ const About = () => {
       name: "Jyotirmoy Bandyopadhayaya",
       role: "Founder",
       github: "BRAVO68WEB",
+      profile_image: "https://safe.b68dev.xyz/XH5ClBR3.jpg",
       bio: "A seasoned software engineer with over 4 years of experience in building scalable systems and developer tools.",
     },
+    {
+      name: "Kostav Mondal",
+      role: "Co-Founder",
+      github: "XxThunderBlastxX",
+      profile_image: "https://safe.b68dev.xyz/24ty6LRi.jpg",
+      bio: "Go Developer | Passionate about creating efficient and secure backend systems.",
+    },
+    {
+      name: "Siddharth Biswas",
+      role: "Full Stack Developer",
+      github: "Atlas2002",
+      profile_image: "https://safe.b68dev.xyz/UsJUCLfH.jpg",
+      bio: "Full Stack Developer | Experienced in building modern web applications with a focus on user experience.",
+    }
   ];
 
   return (
@@ -150,7 +165,7 @@ const About = () => {
                 <div key={index} className="bg-slate-800 rounded-xl p-8 text-center max-w-sm">
                   <div className="mb-4">
                     <img 
-                      src={`https://safe.b68dev.xyz/XH5ClBR3.jpg`}
+                      src={member.profile_image}
                       alt={`${member.name}'s avatar`}
                       className="w-24 h-24 rounded-full mx-auto mb-4"
                     />
