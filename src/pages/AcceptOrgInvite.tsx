@@ -19,6 +19,7 @@ const AcceptOrgInvite = () => {
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [fullNameError, setFullNameError] = useState("");
 
   // Ensure invite_code is defined
   if (!invite_code || typeof invite_code !== "string") {
@@ -68,6 +69,15 @@ const AcceptOrgInvite = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate full name
+    const nameWords = fullName.trim().split(/\s+/);
+    if (nameWords.length < 2) {
+      setFullNameError("Please enter both first and last name");
+      return;
+    }
+    setFullNameError("");
+    
     if (invite_code && orgName && companySize && fullName && password && !acceptOrgInviteMutation.isPending) {
       acceptOrgInviteMutation.mutate({
         invite_code,
@@ -188,11 +198,19 @@ const AcceptOrgInvite = () => {
                         type="text"
                         placeholder="John Doe"
                         value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
+                        onChange={(e) => {
+                          setFullName(e.target.value);
+                          if (fullNameError) setFullNameError("");
+                        }}
                         required
                         disabled={acceptOrgInviteMutation.isPending}
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-emerald-500"
+                        className={`bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-emerald-500 ${
+                          fullNameError ? 'border-red-500 focus:border-red-500' : ''
+                        }`}
                       />
+                      {fullNameError && (
+                        <p className="text-red-400 text-sm mt-1">{fullNameError}</p>
+                      )}
                     </div>
 
                     <div>
